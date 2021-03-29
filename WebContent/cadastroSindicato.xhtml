@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"	
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:p="http://primefaces.org/ui"
+	
+	lang="pt-br">
+	
+	<ui:composition template ="layout.xhtml">
+		<f:metadata>
+			<f:viewParam name="codigoSindicato" value = "#{sindicatoBean.codigoSindicato}"/>
+			<f:viewAction action="#{sindicatoBean.carregar}"></f:viewAction>
+		</f:metadata>	
+		<ui:param name = "title" value = "#{sindicatoBean.titulo}"/>			
+		<ui:define name="conteudo">				
+			<form jsf:id="form">
+				<input type = "hidden" jsf:value="#{sindicatoBean.dadosSindicato.codigoSindicato}"/>				
+				<fieldset>
+					<legend>Dados do Sindicato</legend>			
+					<label for = "nomeSindicato">Nome do Sindicato:</label><br />
+					<input type = "text" jsf:value="#{sindicatoBean.dadosSindicato.nomeSindicato}" id = "nomeSindicato" maxlength="128" jsf:label = "Nome do Sindicato">	
+						<f:validateLength minimum = "2" maximum = "128"></f:validateLength>
+					</input><br />
+					<label for = "sigla">Sigla do Sindicato:</label><br />
+					<input type = "text" jsf:value="#{sindicatoBean.dadosSindicato.siglaSindicato}" id = "sigla" maxlength="16" jsf:label = "Sigla">
+						<f:validateLength minimum = "2" maximum = "16"></f:validateLength>
+					</input><br />							
+					<label for = "cnpj">CNPJ:</label><br />					
+					<p:inputMask type = "text" value="#{sindicatoBean.dadosSindicato.cnpj}" id = "cnpj" maxlength="19" label = "CNPJ" mask="99.999.999/9999-99">						
+						<f:validateRequired></f:validateRequired>
+						<f:validateLength minimum = "2" maximum = "19"></f:validateLength>
+					</p:inputMask><br /><br />							
+					<label for = "codigoArrecadacao">Código de Arrecadação:</label><br />
+					<p:inputMask type = "text" value="#{sindicatoBean.dadosSindicato.codigoArrecadacao}" id = "codigoArrecadacao" maxlength="19" label = "Código de Arrecadação" mask ="999.999.999.99999-9">						
+						<f:validateRequired></f:validateRequired>
+					</p:inputMask><br /><br />							
+					<label for ="regional">Regional:</label><br />
+					<select jsf:value="#{sindicatoBean.dadosSindicato.regional}" id="regional" size="0" jsf:label = "Regional">
+						<f:selectItem itemLabel="Selecione..." itemValue=""></f:selectItem>
+						<f:selectItems value="#{dataBean.regionais}"></f:selectItems>
+						<f:validateRequired></f:validateRequired>						
+					</select><br />						
+					<label for = "setor">Setor do Sindicato:</label><br />
+					<input type = "text" jsf:value="#{sindicatoBean.dadosSindicato.setor}" id = "setor" maxlength="64" jsf:label = "Setor">	
+						<f:validateLength minimum = "2" maximum = "64"></f:validateLength>
+					</input><br />	
+					<label for = "rua">Rua, Avenida, Praça... :</label><br />
+					<input type = "text" jsf:value="#{sindicatoBean.dadosSindicato.endereco.rua}" id = "rua" maxlength="128" jsf:label = "Rua">
+						<f:validateLength minimum = "2" maximum = "128"></f:validateLength>
+					</input><br />				
+					<label for = "numero">Número:</label><br />
+					<input type = "text" jsf:value="#{sindicatoBean.dadosSindicato.endereco.numero}" id = "numero" maxlength="6" jsf:label = "Número">
+						<f:validateLongRange minimum = "1" maximum = "999999"></f:validateLongRange>
+						<f:validateRequired></f:validateRequired>
+					</input><br />				
+					<label for = "complemento">Complemento:</label><br />
+					<input type = "text" jsf:value="#{sindicatoBean.dadosSindicato.endereco.complemento}" id = "complemento" maxlength="32" jsf:label = "Complemento">
+						<f:validateLength maximum = "32"></f:validateLength>
+					</input><br />			
+					<label for = "cidade">Cidade:</label><br />
+					<input type = "text" jsf:value="#{sindicatoBean.dadosSindicato.endereco.cidade}" id = "cidade" maxlength="64" jsf:label = "Cidade">
+						<f:validateLength minimum = "2" maximum = "64"></f:validateLength>
+					</input><br />			
+					<label for="estado">Estado:</label><br />
+					<select jsf:value="#{sindicatoBean.dadosSindicato.endereco.estado.sigla}" id = "estado" size="0" jsf:label = "Estado">
+						<f:selectItem itemLabel="Selecione..." itemValue=""></f:selectItem>
+						<f:selectItems value="#{dataBean.estados}" var="e" itemLabel="#{e.nome}" itemValue="#{e.sigla}"></f:selectItems>
+						<f:validateRequired></f:validateRequired>
+					</select><br />				
+					<label for = "cep">CEP:</label><br />
+					<p:inputMask type = "text" value="#{sindicatoBean.dadosSindicato.endereco.cep}" id = "cep" maxlength="9" label = "CEP" mask = "99999-999">							
+						<f:validateRequired></f:validateRequired>				
+					</p:inputMask><br /><br />
+					<label for = "telefoneDDD">Telefone do Sindicato:</label><br />
+					<input type = "tel" jsf:value="#{sindicatoBean.dadosSindicato.telefone.telefoneDDD}" id = "telefoneDDD" maxlength="2" jsf:label = "DDD Fixo">
+						<f:validateLongRange minimum = "01" maximum = "99"></f:validateLongRange>					
+					</input>&#160;	
+					<input type = "tel" jsf:value="#{sindicatoBean.dadosSindicato.telefone.telefoneNumero}" id = "telefoneNumero" maxlength = "8" jsf:label = "Telefone Fixo">
+						<f:validateLongRange minimum = "00000001" maximum = "999999999"></f:validateLongRange>							
+					</input><br />	
+					<label for = "email">E-mail:</label><br />
+					<input type = "email" jsf:value="#{sindicatoBean.dadosSindicato.email}" id = "email" maxlength="64" jsf:label="E-mail">
+						<f:validateLength maximum = "64"></f:validateLength>
+						<f:validateRegex pattern=".+@.+"></f:validateRegex>
+					</input><br />
+					<label for = "homePage">Home Page:</label><br />
+					<input type = "text" jsf:value="#{sindicatoBean.dadosSindicato.homePage}" id = "homePage" maxlength="64" jsf:label = "Home Page">
+						<f:validateLength maximum = "64"></f:validateLength>
+						</input><br />	
+					<label for = "dataInicio">Data de Início do Mandato Atual:</label><br />				
+					<input type = "date" jsf:value="#{sindicatoBean.dadosSindicato.mandato.dataInicio}" id = "dataInicio" jsf:label = "Data de Início do Mandato Atual">
+						<f:convertDateTime type="localDate" pattern="yyyy-MM-dd"/>	
+						<f:validateRequired></f:validateRequired>
+					</input><br />		
+					<label for = "dataFIm">Data do Fim do Mandato Atual:</label><br />				
+					<input type = "date" jsf:value="#{sindicatoBean.dadosSindicato.mandato.dataFim}" id = "dataFim" jsf:label = "Data do Fim do Mandato Atual">
+						<f:convertDateTime type="localDate" pattern="yyyy-MM-dd"/>	
+						<f:validateRequired></f:validateRequired>					
+					</input><br />	
+				</fieldset>
+				<br />
+				<fieldset>
+					<legend>Redes Sociais</legend>
+					<label for = "linkedin">LinkedIn:</label><br />
+					<input type = "text" jsf:value="#{sindicatoBean.dadosSindicato.linkedin}" id = "linkedin" maxlength="64" jsf:label = "LinkedIn">
+						<f:validateLength maximum = "64"></f:validateLength>
+					</input><br />
+					<label for = "instagram">Instagram:</label><br />
+					<input type = "text" jsf:value="#{sindicatoBean.dadosSindicato.instagram}" id = "instagram" maxlength="64" jsf:label = "Instagram">
+						<f:validateLength maximum = "64"></f:validateLength>
+					</input><br />
+					<label for = "facebook">Facebook:</label><br />
+					<input type = "text" jsf:value="#{sindicatoBean.dadosSindicato.facebook}" id = "facebook" maxlength="64" jsf:label = "Facebook">
+						<f:validateLength maximum = "64"></f:validateLength>
+					</input><br />
+					<label for = "youtube">Youtube:</label><br />
+					<input type = "text" jsf:value="#{sindicatoBean.dadosSindicato.youtube}" id = "youtube" maxlength="64" jsf:label = "Youtube">
+						<f:validateLength maximum = "64"></f:validateLength>
+					</input><br />
+					<label for = "twitter">Twitter:</label><br />
+					<input type = "text" jsf:value="#{sindicatoBean.dadosSindicato.twitter}" id = "twitter" maxlength="64" jsf:label = "Twitter">
+						<f:validateLength maximum = "64"></f:validateLength>
+					</input><br />
+				</fieldset>
+															
+										
+								
+				<br />				
+				<input type = "submit" value="Salvar Dados Digitados" jsf:action="#{sindicatoBean.gravar}"></input>;	
+							
+			
+			</form>
+		</ui:define>
+	</ui:composition>
+	<script src="JavaScript/Mascaras"></script>
+</html>
+

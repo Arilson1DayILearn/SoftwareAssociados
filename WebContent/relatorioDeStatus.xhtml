@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"	
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	
+	lang="pt-br">
+	
+	<ui:composition template ="layout.xhtml">	
+		<ui:param name = "title" value = "Relatório de Status"/>	
+		<ui:define name="conteudo">	
+			<f:metadata>
+				<f:viewAction action = "#{relatorioStatusBean.check}"/>
+			</f:metadata>
+							
+			<form jsf:id="form">
+			
+			<fieldset>
+				<legend>Parâmetro da Pesquisa</legend>
+				<label for ="status">Status:</label>&#160;
+					<select jsf:value="#{relatorioStatusBean.status}" id="status" size="0" jsf:label = "Status">
+						<f:selectItem itemLabel="Selecione..." itemValue=""></f:selectItem>
+						<f:selectItems value="#{dataBean.status}"></f:selectItems>
+						<f:validateRequired></f:validateRequired>						
+					</select><br />							
+			</fieldset>
+			
+			<input type = "submit" value="Gerar Relatório" jsf:action = "#{relatorioStatusBean.gerarRelatorio}" />
+			
+			<br />	<br />
+			
+				<h:panelGroup rendered = "#{not empty relatorioStatusBean.dadosEmpresa}">			
+					<table>
+						<tr>
+							<th>Sindicato</th>
+							<th>Código de Associação</th>
+							<th>Razão Social</th>
+							<th>CNPJ</th>
+							<th>Nome do Contato</th>				
+							<th>E-mail</th>
+							<th>Celular do Contato</th>				
+							<th>Telefone da Empresa</th>
+							<th>Status</th>
+							<th>Ações</th>
+						</tr>
+						<ui:repeat var="e" value="#{relatorioStatusBean.dadosEmpresa}">
+							<tr>
+								<td>#{e.dadosSindicato.siglaSindicato}</td>
+								<td>#{e.codigoAssociado}</td>
+								<td>#{e.razaoSocial}</td>
+								<td>#{e.cnpj}</td>
+								<td>#{e.dadosContato.nomeContato}</td>				
+								<td>#{e.dadosContato.email}</td>
+								<td>#{dataBean.formatTelefone(e.dadosContato.telefoneCelular.telefoneCelularDDD,e.dadosContato.telefoneCelular.telefoneCelularNumero)}</td>
+								<td>#{dataBean.formatTelefone(e.telefone.telefoneDDD, e.telefone.telefoneNumero)}</td>
+								<td>#{e.contribuicaoAssociativa.status}</td>
+								<td> 
+									<input type = "button" value = "Editar" jsf:outcome = "dadosEmpresa?codigoAssociado=#{e.codigoAssociado}"/>					
+								</td>
+							</tr>
+						</ui:repeat>				
+					</table>
+				</h:panelGroup>
+			</form>
+			
+			
+		</ui:define>
+	</ui:composition>
+</html>

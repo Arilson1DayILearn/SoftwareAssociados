@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"	
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:p="http://primefaces.org/ui"
+	
+	lang="pt-br">
+	
+	<ui:composition template ="layout.xhtml">	
+		<ui:param name = "title" value = "#{empresaBean.titulo}"/>	
+		<f:metadata>
+			<f:viewParam name="codigoAssociado" value="#{empresaBean.codigoAssociado}"></f:viewParam>
+			<f:viewAction action="#{empresaBean.carregar}"/>
+		</f:metadata>
+		<ui:define name="conteudo">				
+			<form jsf:id="form">
+				<input type = "hidden" jsf:value="#{empresaBean.dadosEmpresa.codigoAssociado}" />
+				<fieldset>
+					<legend>Dados da Empresa</legend>			
+					<label for = "razaoSocial">Razão Social:</label><br />
+					<input type = "text" jsf:value="#{empresaBean.dadosEmpresa.razaoSocial}" id = "razaoSocial" maxlength="64" jsf:label = "Razão Social">	
+						<f:validateLength minimum = "2" maximum = "64"></f:validateLength>
+					</input><br />
+					<label for = "nomeFantasia">Nome Fantasia:</label><br />
+					<input type = "text" jsf:value="#{empresaBean.dadosEmpresa.nomeFantasia}" id = "nomeFantasia" maxlength="64" jsf:label = "Nome Fantasia">
+						<f:validateLength minimum = "2" maximum = "64"></f:validateLength>
+					</input><br />			
+					<label for = "cnpj">CNPJ:</label><br />					
+					<p:inputMask type = "text" value="#{empresaBean.dadosEmpresa.cnpj}" id = "cnpj" maxlength="18" label = "CNPJ" mask="99.999.999/9999-99">						
+						<f:validateRequired></f:validateRequired>
+					</p:inputMask><br /><br />						
+					<label for = "codigoAatividade">Código da Atividade Econômica Principal:</label><br />
+					<input type = "text" jsf:value="#{empresaBean.dadosEmpresa.codigoAtividade}" id = "codigoAatividade" maxlength="14" jsf:label = "Código da Atividade Econômica">
+						<f:validateLongRange minimum = "01" maximum = "99999999999999"></f:validateLongRange>
+						<f:validateRequired></f:validateRequired>
+					</input><br />				
+					<label for = "descricao">Descrição (objeto social da empresa):</label><br />
+					<input type = "text" jsf:value="#{empresaBean.dadosEmpresa.descricao}" id = "descricao" maxlength="128" jsf:label = "Descrição">
+						<f:validateLength minimum = "2" maximum = "128"></f:validateLength>
+					</input><br />	
+					<label for ="naturezaJuridica">Natureza Jurídica:</label><br />
+					<select jsf:value="#{empresaBean.dadosEmpresa.naturezaJuridica}" id="naturezaJuridica" size="0" jsf:label = "Natureza Jurídica">
+						<f:selectItem itemLabel="Selecione..." itemValue=""></f:selectItem>
+						<f:selectItems value="#{dataBean.naturezasJuridicas}"></f:selectItems>
+						<f:validateRequired></f:validateRequired>						
+					</select><br />			
+					<label for ="tipoEstabelecimento">Tipo de Estabelecimento:</label><br />
+					<select jsf:value="#{empresaBean.dadosEmpresa.tipoEstabelecimento}" id="tipoEstabelecimento" size="0" jsf:label = "Tipo de Estabelecimento">
+						<f:selectItem itemLabel="Selecione..." itemValue=""></f:selectItem>
+						<f:selectItems value="#{dataBean.tiposEstabelecimentos}"></f:selectItems>
+						<f:validateRequired></f:validateRequired>
+					</select><br />								
+					<label for = "capitalSocial">Capital Social:</label><br />
+					<p:inputNumber type = "text" value="#{empresaBean.dadosEmpresa.capitalSocial}" id = "capitalSocial" maxlength = "12" label = "Capital Social" symbol = "R$">
+						<f:validateDoubleRange minimum = "0" maximum = "999999999"></f:validateDoubleRange>
+						<f:validateRequired></f:validateRequired>
+					</p:inputNumber><br /><br />				
+					<label for ="numeroFuncionarios">Número de Funcionários:</label><br />
+					<input type = "text" jsf:value="#{empresaBean.dadosEmpresa.numeroFuncionarios}" id="numeroFuncionarios" maxlength="5" jsf:label = "Número de Funcionários">
+						<f:validateLongRange minimum = "0" maximum = "99999"></f:validateLongRange>
+						<f:validateRequired></f:validateRequired>
+					</input><br />														
+					<label for = "rua">Rua, Avenida, Praça... :</label><br />
+					<input type = "text" jsf:value="#{empresaBean.dadosEmpresa.endereco.rua}" id = "rua" maxlength="128" jsf:label = "Rua">
+						<f:validateLength minimum = "2" maximum = "128"></f:validateLength>
+					</input><br />					
+					<label for = "numero">Número:</label><br />
+					<input type = "text" jsf:value="#{empresaBean.dadosEmpresa.endereco.numero}" id = "numero" maxlength="6" jsf:label = "Número">
+						<f:validateLongRange minimum = "1" maximum = "999999"></f:validateLongRange>
+						<f:validateRequired></f:validateRequired>
+					</input><br />			
+					<label for = "complemento">Complemento:</label><br />
+					<input type = "text" jsf:value="#{empresaBean.dadosEmpresa.endereco.complemento}" id = "complemento" maxlength="32" jsf:label = "Complemento">
+						<f:validateLength maximum = "32"></f:validateLength>
+					</input><br />				
+					<label for = "cidade">Cidade:</label><br />
+					<input type = "text" jsf:value="#{empresaBean.dadosEmpresa.endereco.cidade}" id = "cidade" maxlength="64" jsf:label = "Cidade">
+						<f:validateLength minimum = "2" maximum = "64"></f:validateLength>
+					</input><br />				
+					<label for="estado">Estado:</label><br />
+					<select jsf:value="#{empresaBean.dadosEmpresa.endereco.estado.sigla}" id = "estado" size="0" jsf:label = "Estado">
+						<f:selectItem itemLabel="Selecione..." itemValue=""></f:selectItem>
+						<f:selectItems value="#{dataBean.estados}" var="e" itemLabel="#{e.nome}" itemValue="#{e.sigla}"></f:selectItems>
+						<f:validateRequired></f:validateRequired>
+					</select><br />				
+					<label for = "cep">CEP:</label><br />
+					<p:inputMask type = "text" value="#{empresaBean.dadosEmpresa.endereco.cep}" id = "cep" maxlength="9" label = "CEP" mask = "99999-999">							
+						<f:validateRequired></f:validateRequired>				
+					</p:inputMask><br /><br />
+					<label for = "telefoneDDD">Telefone da Empresa:</label><br />
+					<input type = "tel" jsf:value="#{empresaBean.dadosEmpresa.telefone.telefoneDDD}" id = "telefoneDDD" maxlength="2" jsf:label = "DDD Fixo">
+						<f:validateLongRange minimum = "01" maximum = "99"></f:validateLongRange>					
+					</input>&#160;	
+					<input type = "tel" jsf:value="#{empresaBean.dadosEmpresa.telefone.telefoneNumero}" id = "telefoneNumero" maxlength = "8" jsf:label = "Telefone Fixo">
+						<f:validateLongRange minimum = "00000001" maximum = "999999999"></f:validateLongRange>							
+					</input>											
+				</fieldset>
+				
+				<br />
+				
+				<fieldset>
+					<legend>Dados do Contato</legend>
+					<label for = "nomeContato">Nome do Contato:</label><br />
+					<input type = "text" jsf:value="#{empresaBean.dadosEmpresa.dadosContato.nomeContato}" id = "nomeContato" maxlength="64" jsf:label = "Nome do Contato">
+						<f:validateLength minimum = "2" maximum = "64"></f:validateLength>	
+						<f:validateRequired></f:validateRequired>				
+					</input><br />	
+					<label for = "cpf">CPF:</label><br />
+					<p:inputMask type = "text" value="#{empresaBean.dadosEmpresa.dadosContato.cpf}" id = "cpf" maxlength="14" label = "CPF" mask = "999.999.999-99">						
+						<f:validateRequired></f:validateRequired>
+					</p:inputMask><br /><br />
+					<label for = "rgNumero">RG:</label><br />
+					<input type = "text" jsf:value="#{empresaBean.dadosEmpresa.dadosContato.rg.rgNumero}" id = "rg" maxlength="16" jsf:label = "RG">
+						<f:validateLength minimum = "2" maximum = "16"></f:validateLength>	
+						<f:validateRequired></f:validateRequired>
+					</input><br />	
+					<label for = "rgOrgao">Órgão Expedidor:</label><br />
+					<input type = "text" jsf:value="#{empresaBean.dadosEmpresa.dadosContato.rg.rgOrgao}" id = "rg" maxlength="16" jsf:label = "RG">
+						<f:validateLength minimum = "2" maximum = "16"></f:validateLength>	
+						<f:validateRequired></f:validateRequired>
+					</input><br />
+					<label for = "rgNaturalidade">Naturalidade:</label><br />
+					<input type = "text" jsf:value="#{empresaBean.dadosEmpresa.dadosContato.rg.rgNaturalidade}" id = "rg" maxlength="16" jsf:label = "RG">
+						<f:validateLength minimum = "2" maximum = "16"></f:validateLength>	
+						<f:validateRequired></f:validateRequired>
+					</input><br />		
+					<label for = "funcaoContato">Função do Contato:</label><br />
+					<input type = "text" jsf:value="#{empresaBean.dadosEmpresa.dadosContato.funcaoContato}" id = "funcaoContato" maxlength="30" jsf:label = "Fução do Contato">
+						<f:validateLength minimum = "2" maximum = "30"></f:validateLength>
+						<f:validateRequired></f:validateRequired>	
+					</input><br />
+					<label for = "dataNascimento">Data de Nascimento:</label><br />
+					<input type = "date" jsf:value="#{empresaBean.dadosEmpresa.dadosContato.dataNascimento}" id = "dataNascimento" jsf:label = "Data de Nascimento">
+						<f:convertDateTime type="localDate" pattern="yyyy-MM-dd"/>
+						<f:validateRequired></f:validateRequired>
+					</input><br />
+					<label for = "telefoneCelularDDD">Celular do Contato:</label><br />
+					<input type = "tel" jsf:value="#{empresaBean.dadosEmpresa.dadosContato.telefoneCelular.telefoneCelularDDD}" id = "telefoneCelularDDD" maxlength="2" jsf:label = "DDD Celular">
+						<f:validateLongRange minimum = "01" maximum = "99"></f:validateLongRange>		
+						<f:validateRequired></f:validateRequired>
+					</input>&#160;
+					<input type = "tel" jsf:value="#{empresaBean.dadosEmpresa.dadosContato.telefoneCelular.telefoneCelularNumero}" id = "telefoneCelularNumero" maxlength="9" jsf:label = "Telefone Celular">
+					<f:validateLongRange minimum = "00000001" maximum = "999999999"></f:validateLongRange>		
+					<f:validateRequired></f:validateRequired>
+					</input><br />	
+					<label for = "email">E-mail:</label><br />
+					<input type = "email" jsf:value="#{empresaBean.dadosEmpresa.dadosContato.email}" id = "email" maxlength="64" jsf:label="E-mail">
+						<f:validateLength maximum = "64"></f:validateLength>
+						<f:validateRegex pattern=".+@.+"></f:validateRegex>
+					</input>
+				</fieldset>
+				
+				<br />
+				
+				<fieldset>
+					<legend>Contribuição Associativa</legend>
+					<label for="sindicato">Sindicato:</label><br />
+					<select jsf:value="#{empresaBean.dadosEmpresa.dadosSindicato.codigoSindicato}" id = "sindicato" size="0" jsf:label = "Sindicato">
+						<f:selectItem itemLabel="Selecione..." itemValue=""></f:selectItem>
+						<f:selectItems value="#{dataBean.dadosSindicatos}" var="s" itemLabel="#{s.siglaSindicato}" itemValue="#{s.codigoSindicato}"></f:selectItems>
+						<f:validateRequired></f:validateRequired>
+					</select><br />	
+					<label for = "dataAssociacao">Data de Associação:</label><br />				
+					<input type = "date" jsf:value="#{empresaBean.dadosEmpresa.contribuicaoAssociativa.dataAssociacao}" id = "dataAssociacao" jsf:label = "Data de Associação">
+						<f:convertDateTime type="localDate" pattern="yyyy-MM-dd"/>	
+						<f:validateRequired></f:validateRequired>
+					</input><br />					
+					<label for = "valorMensalidade">Valor da Mensalidade:</label><br />
+					<p:inputNumber type = "text" value="#{empresaBean.dadosEmpresa.contribuicaoAssociativa.valorMensalidade}" id = "valorMensalidade" maxlength="6" label = "Valor da Mensalidade" symbol = "R$">
+						<f:validateDoubleRange maximum = "999999"></f:validateDoubleRange>
+						<f:validateRequired></f:validateRequired>
+					</p:inputNumber><br /><br />
+					<label for ="status">Status:</label><br />
+					<select jsf:value="#{empresaBean.dadosEmpresa.contribuicaoAssociativa.status}" id="status" size="0" jsf:label = "Status">
+						<f:selectItem itemLabel="Selecione..." itemValue=""></f:selectItem>
+						<f:selectItems value="#{dataBean.status}"></f:selectItems>	
+						<f:validateRequired></f:validateRequired>				
+					</select>	
+					<br />					
+																	
+				</fieldset>				
+				<br />
+				
+				<input type = "submit" value="Salvar Dados Digitados" jsf:action="#{empresaBean.gravar}"></input>&#160;
+				<input type = "button" value="Relatório de Status" jsf:outcome= "relatorioDeStatus"
+				jsf:rendered = "#{empresaBean.codigoAssociado != null}"></input>
+							
+			
+			</form>
+		</ui:define>
+	</ui:composition>	
+</html>
+

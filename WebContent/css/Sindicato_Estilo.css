@@ -1,0 +1,306 @@
+*
+{
+	font-family: "Arial";
+}
+
+body
+{
+	text-align: center;		
+}
+
+img
+{
+	max-width:600px;
+    max-height:450px;
+    width: auto;
+    height: auto;
+    
+}
+
+/*nav a
+{
+	color:#4F4F4F;
+	text-decoration: none;
+	font-weight: bold;
+	text-transform: uppercase;
+	font-size: 18px;	
+	
+}*/
+
+/*nav a:hover
+{
+	text-decoration: underline;
+}*/
+
+h1
+{
+	background-color: #5c0099;
+	color:#b3b3b3;
+	text-transform: uppercase;	
+	font-size: 20px;
+	width: 1200px;			
+	padding: 5px;	
+}
+
+h1,
+div#infoMessage,
+fieldset,
+table
+
+{
+	margin-left:auto;
+	margin-right:auto;
+}
+
+div#infoMessage
+{
+	width: 1200px;
+	border-radius: 5px;
+	padding: 5px;
+	color: #CD0000;
+	font-weight: bold;
+}
+
+
+
+fieldset
+{
+	background-color: #ffe6ff;	
+	width: 1200px;
+	text-align: left;
+	border-radius: 5px;
+	border: 0px;
+	
+}
+
+
+
+legend
+{
+	background-color:  #FFFFFF;	
+	padding-top: 5px;
+	padding-bottom: x''px;
+	padding-left: 7px;
+	padding-right: 7px;
+	font-weight: bold;
+	border-color: #5c0099;
+}
+
+legend
+
+{
+	color:#b3b3b3;
+	background-color: #5c0099;
+}
+
+label
+{
+	color: #5c0099;
+}
+
+input,
+select
+{
+	
+	margin-bottom:15px;
+	border: 1px solid;
+	border-color: #5c0099;
+}
+
+input[type=text]#razaoSocial,
+input[type=text]#nomeFantasia,
+input[type=text]#descricao,
+input[type=text]#rua,
+input[type=text]#cidade,
+input[type=text]#nomeContato,
+input[type=email]#email,
+input[type=text]#nomeSindicato,
+input[type=text]#setor,
+input[type=text]#homePage,
+input[type=text]#linkedin,
+input[type=text]#instagram,
+input[type=text]#facebook,
+input[type=text]#youtube,
+input[type=text]#twitter,
+input[type=text]#cargoFuncionario
+{
+	width: 70%;	
+}
+
+input[type=tel]#telefoneCelularDDD,
+input[type=tel]#telefoneDDD
+{
+	width: 30px;
+}
+
+input[type=tel]#telefoneCelularNumero,
+input[type=tel]#telefoneNumero
+{
+	width: 100px;
+}
+
+input[type=button],
+input[type=submit]
+{
+	background-color:  #5c0099;
+	color:#d9d9d9;
+	border-bottom: 3px solid #330033;
+	border-top: 1px solid #330033;
+	border-left: 1px solid #330033;
+	border-right: 1px solid #330033;	
+	font-weight: bold;
+	text-transform: uppercase;
+	border-radius: 5px;
+	padding: 5px 8px;
+}
+
+input[type=button]:hover,
+input[type=submit]:hover
+{
+	background-color: #8c1aff;
+	border-bottom: 3px solid #5c0099;
+}
+
+table
+{
+	font-size: 12px;
+	border-spacing: 1px;
+	border-collapse: separate;
+}
+
+th
+{
+	background-color:  #00b3b3;
+	color: :#b3b3b3;
+	text-transform: uppercase;
+	padding: 3px;
+}
+
+tr:nth-child(even)
+{
+	background-color: #d9b3ff;
+}
+
+tr:nth-child(odd)
+{
+	background-color: #e6ccff;
+	
+}
+
+td
+{
+	padding: 3px;
+}
+
+div#formLogin, 
+div#formLogout
+{	
+	text-align:center;	
+	padding: 5px;	
+	color: #5c0099;		
+}
+
+fieldset#loginSenha,
+c
+{	
+	width: 600px;
+	padding-left: 600px;
+	padding-top: 5px;
+	height: 22px;
+	
+}
+
+fieldset#logout
+{
+	width: 150px;
+	padding-left: 1050px;
+	padding-top: 5px;
+	height: 22px;
+}
+
+
+
+
+.menu ul li
+{
+	background-color: #00b3b3;
+	color:#4F4F4F;
+	float: left;	
+	text-decoration: none;
+	font-weight: bold;
+	text-transform: uppercase;
+	font-size: 18px;
+	width: 400px;
+	height: 40px;
+	display: inline-block;
+	text-align: center;
+	line-height: 40px;	
+	position: relative;
+	
+	
+}
+
+.menu ul li:hover
+{
+	background-color: #7a00cc;
+	color:#d9d9d9;
+}
+
+.menu ul
+{
+	padding:0px;
+}
+
+.menu ul ul
+{
+	display:none;
+	text-decoration: none;
+}
+
+.menu ul li:hover > ul
+{
+	display:block;
+}
+
+.menu ul ul li
+{
+	background-color: #00b3b3;
+	color:#4F4F4F;
+	float: left;	
+	text-decoration: none;
+	font-weight: bold;
+	text-transform: uppercase;
+	font-size: 18px;
+	width: 400px;
+	height: 40px;
+	display: inline-block;
+	text-align: center;
+	line-height: 40px;	
+	position: relative;	
+}
+
+.menu ul ul li:hover
+{
+	background-color: #5c0099;
+	color:#b3b3b3;
+}
+
+.menu a
+{
+	text-decoration: none;
+	color:#d9d9d9;
+}
+
+
+nav.dropdownmenu 
+{
+    display: inline-block;
+    margin-right:auto;
+	margin-left:auto;	
+}
+
+nav{
+   display: flex;
+   justify-content: center;
+}
+

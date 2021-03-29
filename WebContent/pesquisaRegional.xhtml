@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"	
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	
+	lang="pt-br">
+	
+	<ui:composition template ="layout.xhtml">		
+		<ui:param name = "title" value = "Relatório por Regional"/>	
+		<ui:define name="conteudo">	
+			<f:metadata>
+				<f:viewAction action = "#{pesquisaRegionalBean.check}"/>
+			</f:metadata>
+							
+			<form jsf:id="form">
+			
+			<fieldset>
+				<legend>Parâmetro da Pesquisa</legend>				
+				<label for ="regional">Regional:</label>&#160;
+				<select jsf:value="#{pesquisaRegionalBean.regional}" id="regional" size="0" jsf:label = "Regional">
+					<f:selectItem itemLabel="Selecione..." itemValue=""></f:selectItem>
+					<f:selectItems value="#{dataBean.regionais}"></f:selectItems>	
+					<f:validateRequired></f:validateRequired>											
+				</select><br />						
+			</fieldset>		
+			
+			<input type = "submit" value="Gerar Relatório" jsf:action = "#{pesquisaRegionalBean.gerarRelatorio}" />
+			
+			<br />	<br />
+			
+				<h:panelGroup rendered = "#{not empty pesquisaRegionalBean.dadosSindicatos}">			
+					<table>
+						<tr>
+							<th>Código de Arrecadação</th>
+							<th>Nome do Sindicato</th>
+							<th>Sigla</th>
+							<th>Regional</th>
+							<th>Setor</th>
+							<th>Início do Mandato</th>
+							<th>Fim do Mandato</th>
+							<th>E-mail</th>															
+							<th>Telefone do Sindicato</th>							
+							<th>Ações</th>
+						</tr>
+						<ui:repeat var="s" value="#{pesquisaRegionalBean.dadosSindicatos}">
+							<tr>
+								<td>#{s.codigoArrecadacao}</td>
+								<td>#{s.nomeSindicato}</td>
+								<td>#{s.siglaSindicato}</td>
+								<td>#{s.regional}</td>
+								<td>#{s.setor}</td>
+								<td>
+									<h:outputText value="#{s.mandato.dataInicio}">
+										<f:convertDateTime type = "localDate" pattern = "dd/MM/yyyy"></f:convertDateTime>
+									</h:outputText>
+								</td>
+								<td>
+									<h:outputText value="#{s.mandato.dataFim}">
+										<f:convertDateTime type = "localDate" pattern = "dd/MM/yyyy"></f:convertDateTime>
+									</h:outputText>
+								</td>
+								<td>#{s.email}</td>															
+								<td>#{dataBean.formatTelefone(s.telefone.telefoneDDD, s.telefone.telefoneNumero)}</td>								
+								<td> 
+									<input type = "button" value = "Editar" jsf:outcome = "cadastroSindicato?codigoSindicato=#{s.codigoSindicato}"/>&#160;
+									<input type = "submit" value = "Excluir"  onclick = "return confirm('Deseja excluir o sindicato #{s.nomeSindicato}?');" jsf:action = "#{pesquisaSindicatoBean.excluir(s.codigoSindicato)}" />
+								</td>
+							</tr>	
+						</ui:repeat>				
+					</table>
+				</h:panelGroup>
+			</form>
+			
+			
+		</ui:define>
+	</ui:composition>
+</html>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	lang="pt-br">
+	<head jsf:id="head">
+		<meta charset="ISO-8859-1"></meta>
+		<title>Gestão de Associados</title>
+		<link rel = "stylesheet" type ="text/css" href="css/Sindicato_Estilo.css"></link>	
+	</head>
+	<body>
+		
+		<header>
+		<div id="formLogin">
+			<h:form > 						
+				<fieldset id = "loginSenha">   			       	
+		          <h:outputText id="loginText" value="E-mail:"/>&#160;	
+		          <h:inputText id="login"  type = "email" label="Login"
+		            value="#{loginBean.login}" required="true"/>&#160; &#160;		
+		          <h:outputText id="senhaText" value="Senha:"/>&#160;
+		          <h:inputSecret id="senha" type="text" label="Senha"
+		            value="#{loginBean.senha}" required="true"/>&#160;				        
+		        <h:commandButton id="botaoEntrar" value="Entrar" action="#{loginBean.doEfetuarLogin}"/>
+		        </fieldset>
+	      	</h:form>
+      	</div>
+				
+			<img src="images/LOGO.JPG"/>		
+		</header>
+		
+		<h1><h:outputText id="bemVindo" value="Bem vindo(a) ao Sistema de Gestão de Sindicatos Patronais - FIEMG"/></h1>
+			
+		<h:panelGroup rendered="#{!facesContext.messageList.isEmpty()}">
+			<div id="infoMessage">				
+				<h:messages/>
+			</div>
+		</h:panelGroup><br />
+		
+		
+		<br />
+				
+	
+	<ui:insert name = "conteudo"/> 
+	</body>
+
+</html>
+
+

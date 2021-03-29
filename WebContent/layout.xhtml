@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	lang="pt-br">
+	<head jsf:id="head">
+		<meta charset="ISO-8859-1"></meta>
+		<title>Gestão de Associados</title>
+		<link rel = "stylesheet" type ="text/css" href="css/Sindicato_Estilo.css"></link>			
+	</head>
+	<body>
+		<!-- Cabeçalho - Início -->
+		<header>
+		<h:form > 	
+			<div id="formLogout">				
+				<fieldset id = "logout">		          				        
+		        <a jsf:outcome= "login?clear=true">Sair do Sistema</a><br />
+		        </fieldset>
+	        </div>
+      	</h:form>	
+			<img src="images/LOGO.JPG"/>
+			<br />
+			<br />
+			
+			<nav class="menu">
+			
+				<div id="menu">					
+					<ul>			
+						<li>Sindicato
+							<ul>
+								<li><a jsf:outcome= "cadastroSindicato?clear=true">Cadastrar Novo Sindicato</a><br /></li>	
+								<li><a jsf:outcome= "pesquisaDeSindicato?clear=true">Pesquisar Sindicato</a><br /></li>
+								<li><a jsf:outcome= "pesquisaRegional?clear=true">Pesquisar por Regional</a><br /></li>
+								<li><a jsf:outcome= "dadosFuncionario?clear=true">Cadastrar Funcionário</a><br /></li>
+							</ul>
+						</li>
+						<li>Empresas Associadas
+							<ul>
+								<li><a jsf:outcome= "dadosEmpresa?clear=true"> Cadastrar Novo Associado</a><br /></li>	
+								<li><a jsf:outcome= "pesquisaDeAssociado?clear=true">Pesquisar Associado</a><br /></li>
+								<li><a jsf:outcome= "relatorioDeStatus?clear=true"> Gerar Relatório de Status</a><br /></li>							
+							</ul>
+						</li>
+						<li>
+							<a jsf:outcome= "login?clear=true">Sair do Sistema</a><br />							
+						</li>
+					</ul>												
+				</div>
+			</nav>
+			
+		</header>			
+		<br />
+		<br />
+		<br />	
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		
+		<h1>#{title}</h1>
+			
+		<h:panelGroup rendered="#{!facesContext.messageList.isEmpty()}">
+			<div id="infoMessage">				
+				<h:messages/>
+			</div>
+		</h:panelGroup>
+		
+		<br />
+		<!-- Cabeçalho - Fim -->		
+	
+	<ui:insert name = "conteudo"/> 
+	</body>
+
+</html>
+
+

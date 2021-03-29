@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"	
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:p="http://primefaces.org/ui"
+	
+	lang="pt-br">
+	
+	<ui:composition template ="layout.xhtml">	
+		<ui:param name = "title" value = "#{empresaBean.titulo}"/>	
+		<f:metadata>
+			<f:viewParam name="codigoAssociado" value="#{funcionarioBean.codigoFuncionario}"></f:viewParam>
+			<f:viewAction action="#{funcionarioBean.carregar}"/>
+		</f:metadata>
+		<ui:define name="conteudo">				
+			<form jsf:id="form" enctype="multipart/form-data">
+				<input type = "hidden" jsf:value="#{funcionarioBean.dadosFuncionario.codigoFuncionario}" />
+				
+				<fieldset>
+					<legend>Dados do Funcionário</legend>
+					<label for = "nomeFuncionario">Nome do Funcionário:</label><br />
+					<input type = "text" jsf:value="#{funcionarioBean.dadosFuncionario.nomeFuncionario}" id = "nomeFuncionario" maxlength="64" jsf:label = "Nome do Funcionario">
+						<f:validateLength minimum = "2" maximum = "64"></f:validateLength>	
+						<f:validateRequired></f:validateRequired>				
+					</input><br />						
+					<label for = "fotoFuncionario">Foto do Funcionário:</label><br />
+					<input type = "file" jsf:value="#{funcionarioBean.dadosFuncionario.fotoFuncionario}" id = "fotoFuncionario" jsf:label = "Foto do Funcionario">
+						<f:validateRequired></f:validateRequired>				
+					</input><br />												
+					<label for = "cargoFuncionario">Cargo do Funcionário:</label><br />
+					<input type = "text" jsf:value="#{funcionarioBean.dadosFuncionario.cargoFuncionario}" id = "cargoFuncionario" maxlength="32" jsf:label = "Cargo do Funcionário">
+						<f:validateLength minimum = "2" maximum = "32"></f:validateLength>
+						<f:validateRequired></f:validateRequired>	
+					</input><br />					
+					<label for = "telefoneCelularDDD">Celular do Contato:</label><br />
+					<input type = "tel" jsf:value="#{funcionarioBean.dadosFuncionario.telefoneCelular.telefoneCelularDDD}" id = "telefoneCelularDDD" maxlength="2" jsf:label = "DDD Celular">
+						<f:validateLongRange minimum = "01" maximum = "99"></f:validateLongRange>		
+						<f:validateRequired></f:validateRequired>
+					</input>&#160;
+					<input type = "tel" jsf:value="#{funcionarioBean.dadosFuncionario.telefoneCelular.telefoneCelularNumero}" id = "telefoneCelularNumero" maxlength="9" jsf:label = "Telefone Celular">
+					<f:validateLongRange minimum = "00000001" maximum = "999999999"></f:validateLongRange>		
+					<f:validateRequired></f:validateRequired>
+					</input><br />								
+					<label for="sindicato">Sindicato:</label><br />
+					<select jsf:value="#{funcionarioBean.dadosFuncionario.dadosSindicato.codigoSindicato}" id = "sindicato" size="0" jsf:label = "Sindicato">
+						<f:selectItem itemLabel="Selecione..." itemValue=""></f:selectItem>
+						<f:selectItems value="#{dataBean.dadosSindicatos}" var="s" itemLabel="#{s.siglaSindicato}" itemValue="#{s.codigoSindicato}"></f:selectItems>
+						<f:validateRequired></f:validateRequired>
+					</select><br />						
+					<br />	
+				</fieldset>				
+				<br />			
+							
+				<br />
+				
+				<input type = "submit" value="Salvar Dados Digitados" jsf:action="#{empresaBean.gravar}"></input>&#160;
+				<input type = "button" value="Relatório de Status" jsf:outcome= "relatorioDeStatus"
+				jsf:rendered = "#{empresaBean.codigoAssociado != null}"></input>
+							
+			
+			</form>
+		</ui:define>
+	</ui:composition>	
+</html>
+
